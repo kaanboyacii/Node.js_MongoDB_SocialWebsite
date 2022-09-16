@@ -1,7 +1,14 @@
 import express from "express";
+import dotenv from "dotenv";
+import conn from "./db.js";
 
-const app = express()
-const port = 3000;
+dotenv.config();
+
+//connect db
+conn();
+
+const app = express();
+const port = process.env.PORT;
 
 app.set('view engine','ejs');
 
@@ -17,5 +24,5 @@ app.get("/about",(req,res)=>{
 })
 
 app.listen(port,()=>{
-    console.log(`App running on port: $(port)`);
+    console.log(`App running on port: ${port}`);
 });
