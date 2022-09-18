@@ -1,8 +1,12 @@
-const getIndexPage = (req,res) => {
-    res.render("index");
-}
-const getAboutPage = (req,res) => {
-    res.render("about");
-}
+const getIndexPage = (req, res) => {
+    res.render("index", {
+        link: 'index',
+    });
+};
+const getAboutPage = (req, res) => {
+    res.render("about", {
+        link: 'about',
+    });
+};
 
-export {getIndexPage,getAboutPage};
+export { getIndexPage, getAboutPage };
