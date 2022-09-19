@@ -3,10 +3,17 @@ const getIndexPage = (req, res) => {
         link: 'index',
     });
 };
+
 const getAboutPage = (req, res) => {
     res.render("about", {
         link: 'about',
     });
 };
 
-export { getIndexPage, getAboutPage };
+const getRegisterPage = (req, res) => {
+    res.render("register", {
+        link: 'register',
+    });
+};
+
+export { getIndexPage, getAboutPage, getRegisterPage };
