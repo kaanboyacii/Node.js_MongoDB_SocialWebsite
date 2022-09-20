@@ -1,9 +1,10 @@
 const getIndexPage = (req, res) => {
-    res.render("index", {
-        link: 'index',
+    console.log('REQUEST USER:::', req.user);
+  
+    res.render('index', {
+      link: 'index',
     });
-};
-
+  };
 const getAboutPage = (req, res) => {
     res.render("about", {
         link: 'about',
