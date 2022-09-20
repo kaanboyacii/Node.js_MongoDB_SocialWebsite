@@ -16,11 +16,10 @@ const createUser = async (req, res) => {
     });
   }
 };
+
 const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
-
-    console.log('req.body', req.body);
 
     const user = await User.findOne({ username });
 
@@ -28,7 +27,6 @@ const loginUser = async (req, res) => {
 
     if (user) {
       same = await bcrypt.compare(password, user.password);
-      console.log('same', same);
     } else {
       return res.status(401).json({
         succeded: false,
@@ -37,11 +35,13 @@ const loginUser = async (req, res) => {
     }
 
     if (same) {
-      res.status(200).send('You are loggend in');
-      res.status(200).json({
-        user,
-        token: createToken(user._id),
+      const token = createToken(user._id);
+      res.cookie('jwt', token, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24,
       });
+
+      res.redirect('/users/dashboard');
     } else {
       res.status(401).json({
         succeded: false,
@@ -62,4 +62,10 @@ const createToken = (userId) => {
   });
 };
 
-export { createUser, loginUser, createToken };
+const getDashboardPage = (req, res) => {
+  res.render('dashboard', {
+    link: 'dashboard',
+  });
+};
+
+export { createUser, loginUser, getDashboardPage };
