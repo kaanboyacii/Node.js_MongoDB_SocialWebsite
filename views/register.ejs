@@ -76,6 +76,7 @@
                      headers: { "Content-Type": "application/json" }
                   })
                   const data = await res.json();
+                  console.log("DATA", data) // {}
                   if (data) {
                      if (data.email) {
                         emailError.textContent = data.email
@@ -98,6 +99,8 @@
                }
             })
          </script>
+
+
 
 
          <!-- end contact -->
