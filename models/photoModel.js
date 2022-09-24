@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const { Schema} = mongoose;
+const { Schema } = mongoose;
 
 const photoSchema = new Schema({
     name: {
@@ -17,8 +17,12 @@ const photoSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
 });
 
-const Photo = mongoose.model("Photo",photoSchema)
+const Photo = mongoose.model("Photo", photoSchema)
 
 export default Photo;
