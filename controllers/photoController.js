@@ -38,10 +38,6 @@ const getAllPhotos = async (req, res) => {
             photos,
             link: 'photos',
         });
-        res.status(200).render("photos", {
-            photos,
-            link: 'photos',
-        });
         ({
             succeded: true,
             photos,
