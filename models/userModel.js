@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import validator from "validator";
 
-const { Schema} = mongoose;
+const { Schema } = mongoose;
 
 const userSchema = new Schema({
     username: {
@@ -22,13 +22,25 @@ const userSchema = new Schema({
         required: [true, "Password area is required"],
         minLength: [4, "At least 4 characters"],
     },
+    followers: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
+    followings: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
 },
-{
-    timestamps: true
-}
+    {
+        timestamps: true
+    }
 );
 
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
     const user = this;
     bcrypt.hash(user.password, 10, (err, hash) => {
         user.password = hash;
@@ -36,6 +48,6 @@ userSchema.pre('save', function(next) {
     });
 });
 
-const User = mongoose.model("User",userSchema)
+const User = mongoose.model("User", userSchema)
 
 export default User;
