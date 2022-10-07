@@ -1,24 +1,35 @@
 import nodemailer from 'nodemailer';
+import Photo from '../models/photoModel.js';
+import User from '../models/userModel.js';
 
-const getIndexPage = (req, res) => {
+const getIndexPage = async (req, res) => {
+  const photos = await Photo.find().sort({ uploadedAt: -1 }).limit(3);
+
+  const numOfUser = await User.countDocuments({});
+  const numOfPhotos = await Photo.countDocuments({});
+
   res.render('index', {
     link: 'index',
+    photos,
+    numOfUser,
+    numOfPhotos,
   });
 };
+
 const getAboutPage = (req, res) => {
-  res.render("about", {
+  res.render('about', {
     link: 'about',
   });
 };
 
 const getRegisterPage = (req, res) => {
-  res.render("register", {
+  res.render('register', {
     link: 'register',
   });
 };
 
 const getLoginPage = (req, res) => {
-  res.render("login", {
+  res.render('login', {
     link: 'login',
   });
 };
@@ -183,7 +194,7 @@ const sendMail = async (req, res) => {
 
     // send mail with defined transport object
     await transporter.sendMail({
-      to: 'kaanboyacibn@gmail.com', // list of receivers
+      to: 'arinyazilim@gmail.com', // list of receivers
       subject: `MAIL FROM ${req.body.email}`, // Subject line
       html: htmlTemplate, // html body
     });
