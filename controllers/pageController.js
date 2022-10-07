@@ -183,7 +183,7 @@ const sendMail = async (req, res) => {
 
     // send mail with defined transport object
     await transporter.sendMail({
-      to: 'arinyazilim@gmail.com', // list of receivers
+      to: 'kaanboyacibn@gmail.com', // list of receivers
       subject: `MAIL FROM ${req.body.email}`, // Subject line
       html: htmlTemplate, // html body
     });
